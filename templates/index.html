@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block title %}BodyBagz | Horror Never Sleeps{% endblock %}
+
+{% block content %}
+ 
+ <div class="content-container">
+
+                <div class="featured-container">
+    <div class="heading">
+        <h2>Featured Content</h2>
+    </div>
+    <div class="featured-content">
+        {% for post in featured %}
+        <div class="featured-content-{{ 'left' if loop.first else 'right' }}"
+             style="background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), url('{{ post.image_url }}') center/cover no-repeat;">
+            <div class="featured-info">
+                <h3><a href="{{ url_for('view_post', post_id=post['id']) }}" class="title">{{ post['title'] }}</a></h3>
+                <p>{{ post.excerpt }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+                
+
+
+                
+
+
+
+                
+                        
+
+
+
+
+
+
+                {% if reviews %}
+                    <div class="recent-reviews-container">
+                        <div class="heading">
+                            <h2>Recent Reviews</h2>
+                        </div>
+                        <div class="recent-reviews-content">
+
+                            {% for review in reviews %}
+                                <div>
+                                    <div class="img-con">
+                                        <img src="{{ review['image_url'] }}">
+                                        <div class="reviews-info">
+                                            <p>{{  review['media_type']  }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper">
+                                        <h3><a href="{{ url_for('view_post', post_id=review['id']) }}" class="title">{{ review['title'] }}</a></h3>
+                                        <p>{{ review['rating']|stars|safe }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                {% if top_rated %}
+                    <div class="recent-reviews-container">
+                        <div class="heading">
+                            <h2>Top Rated Reviews</h2>
+                        </div>
+                        <div class="recent-reviews-content">
+
+                            {% for post in top_rated %}
+                                <div>
+                                    <div class="img-con">
+                                        <img src="{{ post['image_url'] }}">
+                                        <div class="reviews-info">
+                                            <p>{{  post['media_type']  }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="wrapper">
+                                        <h3><a href="{{ url_for('view_post', post_id=post['id']) }}" class="title">{{ post['title'] }}</a></h3>
+                                        <p>{{ post['rating']|stars|safe }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                
+
+                
+
+                
+
+
+
+        
+
+        
+
+        
+
+
+       
+
+
+
+        <div class="post-container">
+            <div class="heading">
+                <h2>Latest Posts</h2>
+            </div>
+
+            <div class="posts">
+            {% for post in posts[:10] %}
+                <div class="post">
+                    <div>
+                        <div class="img-container">
+                            <img src="{{ post['image_url'] }}" alt="{{ post['title'] }}">
+                        </div>
+                        <div class="post-info">
+                            <p class="post-red">{{ post['category'] }}</p>
+                            <p class="post-black">{{ post['created_at']|format_date }}</p>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <h3><a href="{{ url_for('view_post', post_id=post.id) }}" class="title">{{ post['title'] }}</a></h3>
+                        {{ post['rating']|stars|safe }}
+                        
+                            <p>{{ post.excerpt }}</p>
+
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+            <button id="load-more-btn" data-offset="10" data-media-type="">Load More</button>
+
+    
+
+
+
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+
+            
+
+            
+
+        </div>
+
+        </div>
+
+<script>
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const postsContainer = document.querySelector('.posts');
+    
+    loadMoreBtn.addEventListener('click', async function() {
+        const offset = parseInt(this.dataset.offset);
+        const mediaType = this.dataset.mediaType;
+        
+        // Show loading state
+        loadMoreBtn.textContent = 'Loading...';
+        loadMoreBtn.disabled = true;
+        
+        try {
+            const response = await fetch(`/api/load-more-posts?offset=${offset}&limit=10&media_type=${mediaType}`);
+            const data = await response.json();
+            
+            if (data.posts.length === 0) {
+                loadMoreBtn.textContent = 'No More Posts';
+                return;
+            }
+            
+            // Append new posts to the grid
+            data.posts.forEach(post => {
+                const postHTML = `
+                    <div class="post">
+                        <div>
+                            <div class="img-container">
+                                <img src="${post.image_url}">
+                            </div>
+                            <div class="post-info">
+                                <p class="post-red">${post.category}</p>
+                                <p class="post-black">${post.created_at}</p>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <h3><a href="/post/${post.id}" class="title">${post.title}</a></h3>
+                            <p>${post.excerpt}</p>
+                        </div>
+                    </div>
+                `;
+                postsContainer.insertAdjacentHTML('beforeend', postHTML);
+            });
+            
+            // Update offset for next load
+            this.dataset.offset = offset + 10;
+            loadMoreBtn.textContent = 'Load More';
+            loadMoreBtn.disabled = false;
+            
+        } catch (error) {
+            console.error('Error loading posts:', error);
+            loadMoreBtn.textContent = 'Error - Try Again';
+            loadMoreBtn.disabled = false;
+        }
+    });
+</script>
+{% endblock %}
+
+
+
+

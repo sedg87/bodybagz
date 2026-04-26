@@ -1,0 +1,337 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #161a1d;
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: "Bebas Neue", sans-serif;
+}
+
+main {
+    padding: 50px 0px;
+}
+
+/***********************************************************************************************************************
+
+TOP
+
+************************************************************************************************************************/
+
+.top-container {
+    width: 100%;
+    background-color: #e9373a;
+    padding: 20px 0px;
+}
+
+
+/***********************************************************************************************************************
+
+HEADER
+
+************************************************************************************************************************/
+
+header {
+    width: 100%;
+    padding: 100px 0px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/images/hero.jpg') center/cover no-repeat;
+    background-color: #000;
+}
+
+.header-content {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+} 
+
+
+.header-content h1 {
+    color: #fff;
+    font-size: 3rem;
+}
+
+/***********************************************************************************************************************
+
+CONTENT 
+
+************************************************************************************************************************/
+
+.content-container {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 50px;
+}
+
+/***********************************************************************************************************************
+
+CONTENT LEFT
+
+************************************************************************************************************************/
+
+
+/***********************************************************************************************************************
+
+CONTENT LEFT - FEATURED CONTENT
+
+************************************************************************************************************************/
+
+.featured-content {
+    width: 100%;
+}
+
+.featured-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.featured-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.featured-content > div {
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), url('/static/images/derry.jpg') center/cover no-repeat;
+    min-height: 300px;
+}
+
+.featured-info {
+    position: absolute;
+    bottom: 0;
+    padding: 0px 20px 20px 20px;
+
+}
+
+.featured-info h3 {
+    background-color: #e9373a;
+    color: #fff;
+    padding: 8px;
+    font-size: 1.7rem;
+}
+
+/***********************************************************************************************************************
+
+CONTENT LEFT - POSTS
+
+************************************************************************************************************************/
+
+.posts-container {
+    width: 100%;
+
+}
+
+.posts-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.posts-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.posts-content img:hover {
+    opacity: 0.7;
+    transition: 0.3s ease-in-out;
+}
+
+.posts-content > div {
+    background-color: #2e363b;
+    text-align: center;
+}
+
+
+.posts-content p {
+    color: #fff;
+}
+
+
+
+
+/***********************************************************************************************************************
+
+CONTENT RIGHT
+
+************************************************************************************************************************/
+
+
+.right section {
+    background-color: #2e363b;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.right section img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.right section h3 {
+    font-size: 1.7rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.right section h3::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background-color: #e9373a;
+    display: block;
+}
+
+/***********************************************************************************************************************
+
+ABOUT ME
+
+************************************************************************************************************************/
+
+.about-me p {
+    color: #9eadb6;
+}
+
+/***********************************************************************************************************************
+
+SEARCH
+
+************************************************************************************************************************/
+
+.search input[type=text], .search button {
+    border: none;
+    padding: 10px;
+}
+
+/***********************************************************************************************************************
+
+CATEGORIES
+
+************************************************************************************************************************/
+
+.categories a:link, .categories a:visited {
+    color: #e9373a;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.categories a:hover {
+    color: #b61114;
+    transition: 0.3s ease-in-out;
+}
+
+.categories ul {
+    list-style-type: none;
+    color: #fff;
+}
+
+/***********************************************************************************************************************
+
+IMAGE ZOOM
+
+************************************************************************************************************************/
+
+.image-container {
+    overflow: hidden;
+    display: block;
+}
+
+/***********************************************************************************************************************
+
+TAGS
+
+************************************************************************************************************************/
+
+.tags a:link, .tags a:visited {
+    background-color: #e9373a;
+    padding: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.tags a:hover {
+    background-color: #b61114;
+    color: #fff;
+    transition: 0.3s ease-in-out;
+}
+
+/***********************************************************************************************************************
+
+MOVIE OF THE DAY
+
+************************************************************************************************************************/
+
+.movie-of-the-day img:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
+
+/***********************************************************************************************************************
+
+SOCIALS
+
+************************************************************************************************************************/
+
+.socials ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.socials i {
+    font-size: 1.7rem;
+    color: #9eadb6;
+}
+
+.socials i:hover {
+    color: #e9373a;
+    transition: 0.3s ease-in-out;
+}
+
+
+/******************************************************************************************************************
+
+DESKTOP
+
+*******************************************************************************************************************/
+@media (min-width: 1800px) {
+
+    .header-content {
+        width: 50%;
+    }
+
+    .content-container {
+        width: 50%;
+        grid-template-columns: 4fr 2fr;
+    }
+
+    .featured-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.posts-content {
+    grid-template-columns: 1fr 1fr;
+}
+
+
+}
+

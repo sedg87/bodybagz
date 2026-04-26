@@ -1,0 +1,147 @@
+<!-- v2 -->
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<div class="add-post-container">
+    <div class="heading">
+        <h2>Edit Post</h2>
+    </div>
+    
+    
+        
+        <form method="POST" action="{{ url_for('edit_post', post_id=post['id']) }}" enctype="multipart/form-data">
+            <label>Title:</label>
+            <input type="text" name="title" value="{{ post['title'] }}" required>
+
+            <label>Featured Post:</label>
+            <input type="checkbox" name="is_featured" value="1" {% if post['is_featured'] == 1 %}checked{% endif %}>
+
+            
+            
+            <label>Category:</label>
+            <select name="category" required>
+                <option value="News" {% if post['category'] == 'News' %}selected{% endif %}>News</option>
+                <option value="Movies" {% if post['category'] == 'Movies' %}selected{% endif %}>Movies</option>
+            <option value="TV" {% if post['category'] == 'TV' %}selected{% endif %}>TV</option>
+            <option value="Games" {% if post['category'] == 'Games' %}selected{% endif %}>Games</option>
+            <option value="Reviews" {% if post['category'] == 'Reviews' %}selected{% endif %}>Reviews</option>
+            <option value="Opinion" {% if post['category'] == 'Opinion' %}selected{% endif %}>Opinion</option>
+            <option value="Lists" {% if post['category'] == 'Lists' %}selected{% endif %}>Lists</option>
+            <option value="Coming Soon" {% if post['category'] == 'Coming Soon' %}selected{% endif %}>Coming Soon</option>
+            <option value="Cryptids" {% if post['category'] == 'Cryptids' %}selected{% endif %}>Cryptids</option>
+            </select>
+
+            <label>Media Type:</label>
+            <select name="media_type">
+                <option value="Movie" {% if post['media_type'] == 'Movie' %}selected{% endif %}>Movie</option>
+                <option value="TV" {% if post['media_type'] == 'TV' %}selected{% endif %}>TV Show</option>
+                <option value="Game" {% if post['media_type'] == 'Game' %}selected{% endif %}>Game</option>
+            </select>
+
+            <label>Starring:</label>
+            <input type="text" name="starring" value="{{ post['starring'] }}" placeholder="Enter Cast">
+
+            <label>Directed By:</label>
+            <input type="text" name="director" value="{{ post['director'] }}" placeholder="Enter Director">
+
+            <label>Genre:</label>
+            <select name="genre">
+                <option value="Survival Horror" {% if post['genre'] == 'Survival Horror' %}selected{% endif %}>Survival Horror</option>
+                <option value="Slasher" {% if post['genre'] == 'Slasher' %}selected{% endif %}>Slasher</option>
+                <option value="Vampires" {% if post['genre'] == 'Vampires' %}selected{% endif %}>Vampires</option>
+                <option value="">N/A</option>
+            </select>
+
+            <label>Played On</label>
+            <select name="played_on">
+                <option value="Steam" {% if post['played_on'] == 'Steam' %}selected{% endif %}>Steam</option>
+                <option value="PS5" {% if post['played_on'] == 'PS5' %}selected{% endif %}>PS5</option>
+                <option value="" {% if post['played_on'] == '' %}selected{% endif %}>N/A</option>
+            </select>
+
+            <label>Developer</label>
+            <input type="text" name="developer" value="{{ post['developer'] }}" placeholder="Enter Developer">
+
+            <label>Platforms</label>
+            <input type="text" name="platforms" value="{{ post['platforms'] }}" placeholder="Enter Platforms">
+
+            <label>Enter Verdict:</label>
+            <input type="text" name="verdict" value="{{ post['verdict'] }}" placeholder="Enter Verdict">
+
+            <label>Rating (1-5 stars, for reviews only):</label>
+            <input type="number" name="rating" value="{{ post['rating'] }}" min="1" max="5">
+
+            <label>Release Date (for Coming Soon posts):</label>
+            <input type="date" name="release_date" value="{{ post['release_date'] }}">
+
+            <label>Trailer URL (YouTube embed link - optional):</label>
+            <input type="text" name="trailer_url" value="{{ post['trailer_url'] }}" placeholder="Enter URL">
+
+            <label>Excerpt/Blurb (short description):</label>
+            <textarea name="excerpt" rows="3" maxlength="200">{{ post['excerpt'] or '' }}</textarea>
+
+            <label>Synopsis (for Coming Soon/Reviews):</label>
+            <textarea name="synopsis" rows="4">{{ post['synopsis'] or '' }}</textarea>
+            
+            <label>Image:</label>
+            <input type="file" name="image" value="{{ post['image'] }}" accept="image/*">
+
+            <label>Image Caption:</label>
+            <input type="text" name="image_caption" value="{{ post['image_caption'] }}">
+
+            <div id="editor">{{ post['content']|safe }}</div>
+            <textarea name="content" id="content" style="display:none;"></textarea>
+            
+            <button type="submit">Update Post</button>
+    </form>
+</div>
+
+
+
+<script>
+    function imageHandler() {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+        input.onchange = async () => {
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('image', file);
+            const response = await fetch('/admin/upload-image', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            const range = quill.getSelection();
+            quill.insertEmbed(range.index, 'image', data.url);
+        };
+    }
+
+    var quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: {
+                container: [
+                    ['bold', 'italic', 'underline'],
+                    ['link', 'image'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['clean']
+                ],
+                handlers: {
+                    image: imageHandler
+                }
+            }
+        }
+    });
+
+    document.querySelector('form').onsubmit = function() {
+        const content = quill.root.innerHTML;
+        const cleaned = content.replace(/<img src="data:image[^"]*"[^>]*>/g, '');
+        document.querySelector('#content').value = cleaned;
+    };
+</script>
+
+
+{% endblock %}

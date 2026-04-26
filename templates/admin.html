@@ -1,0 +1,44 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+
+    <div class="analytic-container">
+        <h2>Analytics</h2>
+
+        <div class="analytic-content">
+
+           <div>
+                <h3>Total Posts</h3>
+                <p>{{ posts | length }}</p>
+           </div>
+
+           
+
+
+        </div>
+    </div>
+
+    <div class="admin-generic-container">
+
+        <div class="admin-generic-content">
+
+            {% for post in posts %}
+                <div>
+                    <h3>{{ post['title'] }}</h3>
+                    <p>{{ post['views'] }} views</p>
+                </div>
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+    
+
+
+
+{% endblock %}

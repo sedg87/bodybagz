@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <meta name="description" content="{{ post['excerpt'] }}">
+    <meta property="og:title" content="{{ post['title'] }} | BodyBagz">
+    <meta property="og:image" content="{{ post['image_url'] }}">
+{% endblock %}
+
+{% block title %}{{ post['title'] }} | BodyBagz{% endblock %}
+
+{% block content %}
+
+
+    <div class="content-container">
+
+        <div class="post-page-container">
+            <div class="heading">
+                <h2>{{ post['title'] }}</h2>
+            </div>
+            
+
+            <div class="post-page-content">
+
+
+                <div class="post-page-left">
+                    <img src="{{ post['image_url'] }}" alt="{{ post['title'] }}">
+
+                    {% if post['category'] != 'Coming Soon' %}
+                    <div class="post-meta">
+                        {% set category_urls = {
+                            'Coming Soon': '/upcoming',
+                            'Movies': '/movies',
+                            'TV': '/tv',
+                            'Games': '/games',
+                            'Reviews': '/reviews',
+                            'Opinion': '/opinion',
+                            'Lists': '/lists',
+                            'News': '/'
+                        } %}
+
+                        <p>Posted in <a href="{{ category_urls.get(post['category'], '/') }}">{{ post['category'] }}</a> on {{ post['created_at'] | format_date }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="post-body">
+                        {{ post['content']|safe }}
+                    </div>
+
+                    {% if post['rating'] %}
+                        <div class="post-rating-details">
+                            {% if post['verdict'] %}
+                                <p>{{ post['verdict'] }}</p>
+                            {% endif %}
+                            <p>{{ post['rating']|stars|safe }}</p>
+                            
+                        </div>
+                    {% endif %}
+
+                    
+                    {% if post['synopsis'] %}
+                        <div class="heading">
+                            <h2>Synopsis</h2>
+                        </div>
+                        <p>{{ post['synopsis'] }}</p>
+                    {% endif %}
+
+                    {% if post['trailer_url'] and post['media_type'] == "Movie" %}
+                        
+                        <div class="trailer-container">
+                            <div class="heading">
+                                <h2>Trailer</h2>
+                            </div>
+                            <iframe width="100%" height="400" src="{{ post['trailer_url'] }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    {% endif %}
+
+                    {% if post['trailer_url'] and post['media_type'] == "Game" %}
+                        
+                        <div class="trailer-container">
+                            <div class="heading">
+                                <h2>Watch</h2>
+                            </div>
+                            <iframe width="100%" height="400" src="{{ post['trailer_url'] }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    {% endif %}
+
+                    <div class="more-container">
+                        <div class="heading">
+                            {% if post['category'] == "Lists" %}
+                                <h2>More in Lists</h2>
+                            {% endif %}
+                            
+                        </div>
+                        <div class="more-content">
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="post-page-right">
+
+                    <div class="social-right">
+                        <h2>Share Post</h2>
+                        <ul>
+                            <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}" target="_blank"><i class="fa-brands fa-square-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/intent/tweet?url={{ request.url }}&text={{ post['title'] }}" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a></li>
+                            <li></li>
+                        </ul>
+                        
+                    </div>
+
+                    {% if post['category'] == 'Reviews' %}
+                        <div>
+                            <h2>{{ post['media_type'] }} Info</h2>
+                            {% if post['media_type'] == 'Game' %}
+                                <p><strong>Played on:</strong> <span class="right-info-text">{{ post['played_on'] }}</span></p>
+                                <p><strong>Platforms: </strong> <span class="right-info-text">{{ post['platforms'] }}</span></p>
+                                <p><strong>Release Date</strong> <span class="right-info-text">{{ post['release_date'] | format_release_date }}</span></p>
+                                <p><strong>Developer</strong> <span class="right-info-text">{{ post['developer'] }}</span></p>      
+                            {% endif %}
+                            {% if post['media_type'] == 'Movie' %}
+                                <p><strong>Director: </strong> <span class="right-info-text">{{ post['director'] }}</span></p>
+                                <p><strong>Starring:</strong> <span class="right-info-text">{{ post['starring'] }}</span></p>
+                                <p><strong>Release Date: </strong> <span class="right-info-text">{{ post['release_date'] | format_release_date }}</span></p>
+                                <p><strong>Genre: </strong> <span class="right-info-text">{{ post['genre'] }}</span></p>  
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    
+
+                    {% if post['category'] == "Coming Soon" %}
+                        <div>
+                            <h2>{{ post['media_type'] }} Info</h2>
+                            <p><strong>Director: </strong> <span class="right-info-text">{{ post['director'] }}</span></p>
+                                <p><strong>Starring:</strong> <span class="right-info-text">{{ post['starring'] }}</span></p>
+                                <p><strong>Release Date: </strong> <span class="right-info-text">{{ post['release_date'] | format_release_date }}</span></p>
+                                <p><strong>Genre: </strong> <span class="right-info-text">{{ post['genre'] }}</span></p>  
+                        </div>
+                    {% endif %}
+
+                        <div>
+                            <h2>Trending</h2>
+                            {% for post in trending %}
+                                <div class="trending-entry">
+                                    <img src="{{ post['image_url'] }}" alt="post['title']">
+                                    <a href="{{ url_for('view_post', post_id=post.id) }}">{{ post.title }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        
+
+
+
+
+        
+            
+                
+            
+        
+
+        
+
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+

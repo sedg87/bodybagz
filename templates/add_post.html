@@ -1,0 +1,160 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+
+<h2>Add New Post</h2>
+
+<div class="add-post-container">
+        
+        <form method="POST" action="{{ url_for('add_post') }}" enctype="multipart/form-data">
+            <label>Title:</label>
+            <input type="text" name="title" required>
+
+            <label>Featured Post:</label>
+            <input type="checkbox" name="is_featured" value="1">
+
+            
+            
+            <label>Category:</label>
+            <select name="category" required>
+                <option value="News">News</option>
+                <option value="Movies">Movies</option>
+                <option value="TV">TV</option>
+                <option value="Games">Games</option>
+                <option value="Reviews">Reviews</option>
+                <option value="Opinion">Opinion</option>
+                <option value="Lists">Lists</option>
+                <option value="Coming Soon">Coming Soon</option>
+                <option value="Cryptids">Cryptids</option>
+            </select>
+
+            <label>Media Type:</label>
+            <select name="media_type">
+                <option value="Movie">Movie</option>
+                <option value="TV">TV Show</option>
+                <option value="Game">Game</option>
+                <option value="Anime">Anime</option>
+                <option value="">N/A</option>
+            </select>
+
+            <label>Starring:</label>
+            <input type="text" name="starring" placeholder="Enter Cast">
+
+            <label>Directed By:</label>
+            <input type="text" name="director" placeholder="Enter Director">
+
+            <label>Genre:</label>
+            <select name="genre">
+                <option value="Survival Horror">Survival Horror</option>
+                <option value="Slasher">Slasher</option>
+                <option value="Vampires">Vampires</option>
+                <option value="Supernatural">Supernatural</option>
+                <option value="Body">Body</option>
+                <option value="">N/A</option>
+            </select>
+
+            <label>Played On</label>
+            <select name="played_on">
+                <option value="Steam">Steam</option>
+                <option value="PS5">PS5</option>
+                <option value="">N/A</option>
+            </select>
+
+            <label>Developer</label>
+            <input type="text" name="developer" placeholder="Enter Developer">
+
+            <label>Platforms</label>
+            <input type="text" name="platforms" placeholder="Enter Platforms">
+
+            <label>Enter Verdict:</label>
+            <input type="text" name="verdict" placeholder="Enter Verdict">
+
+            <label>Rating (1-5 stars, for reviews only):</label>
+            <input type="number" name="rating" min="1" max="5">
+
+            <label>Release Date (for Coming Soon posts):</label>
+            <input type="date" name="release_date">
+
+            <label>Trailer URL (YouTube embed link - optional):</label>
+            <input type="text" name="trailer_url" placeholder="Enter URL">
+
+            <label>Excerpt/Blurb (short description):</label>
+            <textarea name="excerpt" rows="3" maxlength="200"></textarea>
+
+            <label>Synopsis:</label>
+            <textarea name="synopsis" rows="3" maxlength="200"></textarea>
+
+            
+            
+            <label>Image:</label>
+            <input type="file" name="image" accept="image/*">
+
+            <label>Image Caption:</label>
+            <input type="text" name="image_caption">
+            
+            
+                <div id="editor"></div>
+                    <textarea name="content" id="content" style="display:none;"></textarea>
+                
+                
+
+                
+                
+<script>
+    function imageHandler() {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+        input.onchange = async () => {
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('image', file);
+            const response = await fetch('/admin/upload-image', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            const range = quill.getSelection();
+            quill.insertEmbed(range.index, 'image', data.url);
+        };
+    }
+
+    var quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: {
+                container: [
+                    ['bold', 'italic', 'underline'],
+                    ['link', 'image'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['clean']
+                ],
+                handlers: {
+                    image: imageHandler
+                }
+            }
+        }
+    });
+
+    document.querySelector('form').onsubmit = function() {
+        // Remove any base64 images before submitting
+        const content = quill.root.innerHTML;
+        const cleaned = content.replace(/<img src="data:image[^"]*"[^>]*>/g, '');
+        document.querySelector('#content').value = cleaned;
+    };
+</script>
+
+            
+            
+            
+            <button type="submit">Add Post</button>
+        </form>
+</div>
+
+
+
+
+{% endblock %}

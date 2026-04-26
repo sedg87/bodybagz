@@ -1,0 +1,28 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+    <div class="inbox-container">
+        <div class="heading">
+            <h2>Contact / Messages</h2>
+        </div>
+        
+        <div class="inbox-content">
+            {% for message in messages %}
+                <div>
+                    <p class="from">{{ message['name'] }}</p>
+                    <p>{{ message['email'] }}</p>
+                    <p>{{ message['reason'] }}</p>
+                    <p>{{ message['message'] }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

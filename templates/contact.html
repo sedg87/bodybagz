@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact | BodyBagz{% endblock %}
+
+{% block content %}
+
+
+    <div class="content-container">
+        
+
+        <div class="contact-container">
+
+            <div class="heading">
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-content">
+                <p>If you want to contact me regarding anything on the website, please use the contact form below. Please feel free to contact me with movie suggestions and movies you'd like me to review - I would love these! You can also pick another option from the dropdown menu. Thank you getting in touch!</p>
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p><span class="flash-message">{{ message }}</span></p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+
+                <form method="POST" class="contact-form">
+                    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+
+                    <label>Name: </label>
+                    <input type="text" name="name" required>
+
+                    <label>Email: </label>
+                    <input type="email" name="email" required>
+
+                    <label>Reason for Contact:</label>
+                    <select name="reason" required>
+                        <option value="">Select a reason...</option>
+                        <option value="Technical Issue">Technical Issue</option>
+                        <option value="Movie Suggestion">Movie Suggestion</option>
+                        <option value="Game Suggestion">Game Suggestion</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label>Message: </label>
+                    <textarea name="message" rows="8" required></textarea>
+
+                    <button type="submit">Send Message</button>
+
+                </form>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+{% endblock %}

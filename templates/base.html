@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BodyBagz | Horror{% endblock %}</title>
+    <meta name="description" content="BodyBagz | Horror Never Sleeps">
+    {% block meta %}{% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+
+
+
+    
+
+    <header>
+        <div class="header-content">
+            <a href="{{ url_for('home') }}"><img src="/static/images/logo-done.png"></a>
+        </div>
+    </header>
+
+
+    
+
+
+
+    <nav>
+    <div class="nav-content">
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="nav-left" id="navMenu">
+            <button class="close-menu" id="closeMenu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
+                <li><a href="{{ url_for('movies') }}" class="{% if request.endpoint == 'movies' %}active{% endif %}">Movies</a></li>
+                <li><a href="{{ url_for('tv') }}" class="{% if request.endpoint == 'tv' %}active{% endif %}">TV</a></li>
+                <li><a href="{{ url_for('games') }}" class="{% if request.endpoint == 'games' %}active{% endif %}">Games</a></li>
+                <li><a href="{{ url_for('reviews') }}" class="{% if request.endpoint == 'reviews' %}active{% endif %}">Reviews</a></li>
+                <li><a href="{{ url_for('lists') }}" class="{% if request.endpoint == 'lists' %}active{% endif %}">Lists</a></li>
+                <li><a href="{{ url_for('opinion') }}" class="{% if request.endpoint == 'opinion' %}active{% endif %}">Opinion</a></li>
+                <li><a href="{{ url_for('upcoming') }}" class="{% if request.endpoint == 'upcoming' %}active{% endif %}">Upcoming</a></li>
+                <li><a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
+                <li><a href="{{ url_for('contact') }}" class="{% if request.endpoint == 'contact' %}active{% endif %}">Contact</a></li>
+            </ul>
+        </div>
+        
+        <div class="nav-right">
+            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                    <input type="text" name="q" placeholder="Search..." required>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+    <div class="undernav-container">
+
+        <div class="undernav-content">
+
+        </div>
+
+
+    </div>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+
+       
+    </main>
+
+    
+
+    <footer>
+        <div class="footer-content">
+            
+            <div class="footer-social">
+                <img src="/static/images/logo-done.png" class="footer-logo">
+                <p>From classic slashers to indie survival horror games, if it gives you nightmares, I'm probably writing about it.</p>
+                <ul>
+                    <li><a href="https://www.facebook.com/profile.php?id=61588657290825" target="_blank"><i class="fa-brands fa-square-facebook"></i></a></li>
+                    <li><a href="https://x.com/BodyBagZ1987" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 BodyBagz. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-left');
+        const closeMenu = document.getElementById('closeMenu');
+        
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+        
+        closeMenu.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+        });
+    </script>
+
+</body>
+</html>

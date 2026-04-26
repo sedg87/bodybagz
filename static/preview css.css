@@ -1,0 +1,446 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #161a1d;
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: "Bebas Neue", sans-serif;
+}
+
+main {
+    width: 100%;
+    padding: 50px 0px;
+}
+
+/***********************************************************************************************************************
+
+OTHER
+
+************************************************************************************************************************/
+
+.heading {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.heading h2 {
+    color: #fff;
+    font-size: 1.8rem;
+
+}
+
+.heading h2::after {
+    content: "";
+    background-color: #e9373a;
+    width: 60px;
+    height: 5px;
+    display: block;
+}
+
+/***********************************************************************************************************************
+
+ADMIN
+
+************************************************************************************************************************/
+
+.admin-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+/***********************************************************************************************************************
+
+ADMIN LEFT
+
+************************************************************************************************************************/
+
+.admin-left {
+    height: 100vh;
+    position: sticky;
+    background-color: #2e363b;
+    padding: 50px 0px;
+}
+
+/***********************************************************************************************************************
+
+ADMIN LEFT - WELCOME
+
+************************************************************************************************************************/
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.admin-left section {
+    padding: 0px 30px;
+}
+
+.welcome {
+    text-align: center;
+}
+
+.welcome h3 {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.quote {
+    color: #8495a0;
+    font-size: 1.1rem;
+}
+
+
+/***********************************************************************************************************************
+
+ADMIN LEFT - ADMIN ACTIONS/LINKS
+
+************************************************************************************************************************/
+
+.admin-links {
+    margin: 50px 0px;
+}
+
+.admin-links ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-links a:link, .admin-links a:visited {
+    background-color: #e9373a;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.admin-links a:hover {
+    background-color: #000;
+    transition: 0.3s ease-in-out;
+}
+
+.admin-links i {
+    margin-right: 5px;
+}
+
+.admin-links h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+
+
+/***********************************************************************************************************************
+
+NAV
+
+************************************************************************************************************************/
+
+nav {
+    width: 100%;
+    background-color: #2e363b;
+    padding: 20px 0px;
+}
+
+.nav-content {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+nav a:link, nav a:visited {
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #e9373a;
+    transition: 0.3s ease-in-out;
+}
+
+.undernav-container {
+    width: 100%;
+    background-color: #0b0d0e;
+    padding: 20px 0px;
+}
+
+
+/***********************************************************************************************************************
+
+HEADER
+
+************************************************************************************************************************/
+
+header {
+    width: 100%;
+    padding: 100px 0px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/static/images/hero.jpg') center/cover no-repeat;
+    background-color: #000;
+}
+
+.header-content {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+} 
+
+
+.header-content h1 {
+    color: #fff;
+    font-size: 3rem;
+}
+
+/***********************************************************************************************************************
+
+CONTENT CONTAINER
+
+************************************************************************************************************************/
+
+.content-container {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+
+
+
+/***********************************************************************************************************************
+
+CONTENT MAIN - FEATURED CONTENT
+
+************************************************************************************************************************/
+
+.featured-content {
+    width: 100%;
+}
+
+.featured-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.featured-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.featured-content-left {
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), url('/static/images/derry.jpg') center/cover no-repeat;
+    min-height: 300px;
+}
+
+.featured-content-right {
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), url('/static/images/resi.jpg') center/cover no-repeat;
+    min-height: 300px;
+}
+
+.featured-info {
+    position: absolute;
+    bottom: 0;
+    padding: 0px 20px 20px 20px;
+
+}
+
+.featured-info h3 {
+    color: #fff;
+    font-size: 1.7rem;
+}
+
+.featured-info p {
+    color: #fff;
+}
+
+/***********************************************************************************************************************
+
+MAIN CONTENT - COMING SOON
+
+************************************************************************************************************************/
+
+.soon-container {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.soon-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 0px;
+}
+
+.soon-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.soon-content img:hover {
+    opacity: 0.7;
+    transition: 0.3s ease-in-out;
+}
+
+.soon-content > div {
+    background-color: #2e363b;
+    
+}
+
+.soon-content p {
+    color: #fff;
+}
+
+/***********************************************************************************************************************
+
+BANNER / AD / MISC
+
+************************************************************************************************************************/
+
+.advert {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #2e363b;
+    padding: 50px 0px;
+    margin-top: 50px;
+    text-align: center;
+    border: 1px #596872 solid;
+    color: #fff;
+}
+
+/***********************************************************************************************************************
+
+POSTS
+
+************************************************************************************************************************/
+
+.posts-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.posts-left {
+    height: 500px;
+}
+
+.posts-right {
+    
+}
+
+
+/***********************************************************************************************************************
+
+FOOTER
+
+************************************************************************************************************************/
+
+footer {
+    width: 100%;
+    background-color: #0b0d0e;
+    padding: 50px 0px;
+}
+
+.footer-content {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+footer h1 {
+    color: #fff;
+}
+
+footer p {
+    color: #fff;
+}
+
+
+
+/******************************************************************************************************************
+
+DESKTOP
+
+*******************************************************************************************************************/
+@media (min-width: 1800px) {
+
+.header-content {
+    width: 50%;
+    }
+
+.nav-content {
+    width: 50%;
+}
+
+.content-container {
+    width: 50%;
+    grid-template-columns: 1fr;
+    }
+
+.featured-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.soon-content {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.footer-content {
+    width: 50%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.footer-content > div {
+    background-color: aqua;
+}
+
+.advert {
+    width: 50%;
+}
+
+.posts-container {
+    width: 50%;
+    grid-template-columns: 4fr 2fr;
+}
+
+}

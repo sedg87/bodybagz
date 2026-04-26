@@ -1,0 +1,194 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+
+
+
+<div class="manage-container">
+    <h2>Reviews</h2>
+    <div class="manage-content">
+        {% for review in reviews %}
+            <div>
+                <img src="{{ review['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ review['title'] }}</h3>
+                    <p>{{ review['category'] }}</p>
+                    <p>{{ review['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=review['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=review['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                        
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>News</h2>
+    <div class="manage-content">
+        {% for item in news %}
+            <div>
+                <img src="{{ item['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ item['title'] }}</h3>
+                    <p>{{ item['category'] }}</p>
+                    <p>{{ item['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=item['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=item['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>Opinion</h2>
+    <div class="manage-content">
+        {% for opinion in opinions  %}
+            <div>
+                <img src="{{ opinion['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ opinion['title'] }}</h3>
+                    <p>{{ opinion['category'] }}</p>
+                    <p>{{ opinion['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=opinion['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=opinion['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>Coming Soon</h2>
+    <div class="manage-content">
+        {% for item in upcoming  %}
+            <div>
+                <img src="{{ item['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ item['title'] }}</h3>
+                    <p>{{ item['category'] }}</p>
+                    <p>{{ item['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=item['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=item['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>Lists</h2>
+    <div class="manage-content">
+        {% for list in lists  %}
+            <div>
+                <img src="{{ list['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ list['title'] }}</h3>
+                    <p>{{ list['category'] }}</p>
+                    <p>{{ list['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=list['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=list['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>Cryptids</h2>
+    <div class="manage-content">
+        {% for cryptid in cryptids  %}
+            <div>
+                <img src="{{ cryptid['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ cryptid['title'] }}</h3>
+                    <p>{{ cryptid['category'] }}</p>
+                    <p>{{ cryptid['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=cryptid['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=cryptid['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>Movies</h2>
+    <div class="manage-content">
+        {% for movie in movies  %}
+            <div>
+                <img src="{{ movie['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ movie['title'] }}</h3>
+                    <p>{{ movie['category'] }}</p>
+                    <p>{{ movie['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=movie['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=movie['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>TV</h2>
+    <div class="manage-content">
+        {% for show in tv  %}
+            <div>
+                <img src="{{ show['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ show['title'] }}</h3>
+                    <p>{{ show['category'] }}</p>
+                    <p>{{ show['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=show['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=show['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="manage-container">
+    <h2>Game</h2>
+    <div class="manage-content">
+        {% for game in games  %}
+            <div>
+                <img src="{{ game['image_url'] }}">
+                <div class="wrapper">
+                    <h3>{{ game['title'] }}</h3>
+                    <p>{{ game['category'] }}</p>
+                    <p>{{ game['created_at']|format_date }}</p>
+                    <a href="{{ url_for('edit_post', post_id=game['id']) }}" class="edit-btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_post', post_id=game['id']) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
