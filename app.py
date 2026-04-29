@@ -10,7 +10,6 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
-app.secret_key = 'jfnjkdfnjf84jnfjndfdkjfdjfdf-hjfbuhdfdfbdfbbdf'
 
 DATABASE = 'database.db'
 
